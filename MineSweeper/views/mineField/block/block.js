@@ -8,12 +8,16 @@ import {
     View,
     Image,
     TouchableOpacity,
+    Dimensions,
 } from 'react-native';
+
+let windowWidth = Dimensions.get('window').width;
 
 const s = StyleSheet.create({
   block:{
-    width:20,
-    height:20,
+    borderTopWidth:1,
+    borderLeftWidth:1,
+    borderColor:'rgb(49, 52, 68)',
   },
   unActive:{
     backgroundColor:'rgb(79, 172, 172)'
@@ -53,8 +57,7 @@ module.exports = class Block extends Component {
               style = s.unActive
         }
         return (
-          <TouchableOpacity style={[s.block,style]}>
-          <Text>123</Text>
+          <TouchableOpacity style={[s.block,style,{width:windowWidth/this.props.col,height:windowWidth/this.props.col,}]}>
           {
             this.state.type==1?
             <Text style={s.text}>{this.state.around}</Text>

@@ -10,8 +10,11 @@ import {
 import Block from './block/block';
 
 const s = StyleSheet.create({
-
-
+  mineContainer:{
+    flex:1,
+    flexDirection:'row',
+    flexWrap:'wrap',
+  }
 });
 
 module.exports = class MineField extends Component {
@@ -145,15 +148,18 @@ module.exports = class MineField extends Component {
           sign = {this.signOne.bind(this)}
           unSign = {this.unSignOne.bind(this)}
           data = {col}
+          col = {this.cols}//列数，用来保持每一列个数固定
         ></Block>
-        doms.push(temp)
+        doms.push(temp);
         key++;
       }
     }
-    console.log(doms);
     return (
-      <View style={{flex:1}}>
-        {doms}
+      <View style={s.container}>
+        <View style={{flex:1}}></View>
+        <View style={s.mineContainer}>
+          {doms}
+        </View>
       </View>
     )
   }
