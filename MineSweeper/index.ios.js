@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import Layout from './views/layout';
 
-class helloworld extends Component {
+class MineSweeper extends Component {
   render() {
     return (
         <Navigator

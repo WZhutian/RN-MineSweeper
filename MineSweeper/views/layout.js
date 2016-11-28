@@ -1,7 +1,6 @@
 'use strict'
 import React, { Component } from 'react';
 import {
-  AppRegistry,
   StyleSheet,
   Text,
   View
@@ -9,8 +8,17 @@ import {
 import MineField from './mineField/mineField';
 import InfoArea from './infoArea/infoArea';
 
-class MineSweeper extends Component {
+module.exports = class Layout extends Component {
+  static propTypes = {
+      navigator: React.PropTypes.object,
+      route: React.PropTypes.object
+  };
 
+  constructor(props){
+      super(props);
+      this.state = {
+      }
+  }
   render() {
     return (
       <View style={styles.container}>
@@ -41,5 +49,3 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 });
-
-AppRegistry.registerComponent('MineSweeper', () => MineSweeper);

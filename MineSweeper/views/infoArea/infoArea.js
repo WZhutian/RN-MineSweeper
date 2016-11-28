@@ -33,6 +33,7 @@ module.exports = class infoArea extends Component {
       return(
         <View style={s.container}>
           <ScrollView
+            style={{flex:1}}
             horizontal = {true}
           >
             <View style={s.infoPannel}>
