@@ -3,42 +3,44 @@ import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
-  Text,
-  View
+  Navigator,
 } from 'react-native';
-import MineField from './views/mineField/mineField';
-import InfoArea from './views/infoArea/infoArea';
-class MineSweeper extends Component {
+import Layout from './views/layout';
 
+class helloworld extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <InfoArea></InfoArea>
-        <MineField
-          level={1}
+        <Navigator
+            configureScene={
+                (route) => {
+                    if(route.configureScene){
+                        return route.configureScene
+                    }
+                    return Navigator.SceneConfigs.FloatFromRight
+                }
+            }
+            initialRoute={
+                {
+                    name : 'Layout',
+                    index : 0,
+                    component : Layout,
+                    configureScene: Navigator.SceneConfigs.FloatFromRight
+                }
+            }
+            renderScene={
+                (route, navigator) =>
+                {
+                    var Component = route.component;
+                        return <Component
+                        navigator={navigator}
+                        route={route}
+                    />
+                }
+            }
         />
-      </View>
+
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    // backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
 
 AppRegistry.registerComponent('MineSweeper', () => MineSweeper);

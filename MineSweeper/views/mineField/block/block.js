@@ -17,7 +17,7 @@ const s = StyleSheet.create({
   block:{
     borderWidth:1,
     borderWidth:1,
-    borderColor:'rgb(49, 52, 68)',
+    borderColor:'rgb(36, 75, 99)',
     justifyContent:'center',
     alignItems:'center',
   },
@@ -42,10 +42,21 @@ module.exports = class Block extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            haveMine: this.props.data.haveMine,//bool
-            type: this.props.data.type,//0, 1, 2
-            around: this.props.data.around,//0-9
+            haveMine: this.props.haveMine,//bool
+            type: this.props.type,//0, 1, 2
+            around: this.props.around,//0-9
         }
+    }
+    //提升性能
+    componentWillReceiveProps(nextProps){
+      if(this.props.type != nextProps.type){
+        this.setState({
+          type:nextProps.type
+        })
+        return true;
+      }else{
+        return false;
+      }
     }
     render() {
         let style;
@@ -66,9 +77,10 @@ module.exports = class Block extends Component {
            style={[s.block,style,{width:windowWidth/this.props.col,height:windowWidth/this.props.col,}]}
           >
           {
-            this.state.type==1?
+            // this.state.type==1?
             <Text style={s.text}>{this.state.around}</Text>
-            : null}
+            // : null
+          }
           {
             this.state.type==2?
             <Image></Image>:null
