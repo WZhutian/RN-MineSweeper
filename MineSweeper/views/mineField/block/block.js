@@ -15,9 +15,11 @@ let windowWidth = Dimensions.get('window').width;
 
 const s = StyleSheet.create({
   block:{
-    borderTopWidth:1,
-    borderLeftWidth:1,
+    borderWidth:1,
+    borderWidth:1,
     borderColor:'rgb(49, 52, 68)',
+    justifyContent:'center',
+    alignItems:'center',
   },
   unActive:{
     backgroundColor:'rgb(79, 172, 172)'
@@ -29,7 +31,8 @@ const s = StyleSheet.create({
     backgroundColor:'rgb(7, 72, 172)'
   },
   text:{
-
+    color:'white',
+    fontSize:16,
   }
 
 });
@@ -57,14 +60,18 @@ module.exports = class Block extends Component {
               style = s.unActive
         }
         return (
-          <TouchableOpacity style={[s.block,style,{width:windowWidth/this.props.col,height:windowWidth/this.props.col,}]}>
+          <TouchableOpacity
+            onPress={this.props.press}
+            onLongPress={this.props.longPress}
+           style={[s.block,style,{width:windowWidth/this.props.col,height:windowWidth/this.props.col,}]}
+          >
           {
             this.state.type==1?
             <Text style={s.text}>{this.state.around}</Text>
             : null}
           {
             this.state.type==2?
-            <Image ></Image>:null
+            <Image></Image>:null
           }
           </TouchableOpacity>
         )

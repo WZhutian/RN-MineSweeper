@@ -119,20 +119,27 @@ module.exports = class MineField extends Component {
           }
       }
   }
-  signOne(row, col) {
+  longPress(row, col) {
       if (this.state.rest == 0) return;
-      this.state.data[row][col].type = 2;
-      this.setState({
-          rest: this.state.rest - 1,
-      })
+
+      if (this.state.data[row][col].type == 2) {
+        this.state.data[row][col].type = 0;
+        this.state.rest -= 1;
+      } else if (this.state.data[row][col].type == 0){
+        this.state.data[row][col].type = 2;
+        this.state.rest += 1;
+      }
+
   }
-  unSignOne(row, col) {
-      if (this.state.data[row][col].type != 2) return;
-      this.state.data[row][col].type = 0;
-      this.setState({
-          rest: this.state.rest + 1,
-      })
+  press(row,col){
+      if (this.state.data[row][col].type == 0) {
+        openOne(row,col);
+      } else if (this.state.data[row][col].type == 1) {
+        //先判断周围8个格子的雷以及是否插旗
+        
+      }
   }
+  //重置所有
   refresh() {
       this.setState({
           row: JSON.parse(JSON.stringify(this.backup)),
@@ -144,9 +151,8 @@ module.exports = class MineField extends Component {
       for(let col of row){
         let temp = <Block
           key = {key}
-          open = {this.openOne.bind(this)}
-          sign = {this.signOne.bind(this)}
-          unSign = {this.unSignOne.bind(this)}
+          press = {this.press.bind(this,row,col)}
+          longPress = {this.longPress.bind(this,row,col)}
           data = {col}
           col = {this.cols}//列数，用来保持每一列个数固定
         ></Block>
@@ -156,7 +162,6 @@ module.exports = class MineField extends Component {
     }
     return (
       <View style={s.container}>
-        <View style={{flex:1}}></View>
         <View style={s.mineContainer}>
           {doms}
         </View>

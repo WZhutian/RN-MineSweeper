@@ -7,16 +7,13 @@ import {
   View
 } from 'react-native';
 import MineField from './views/mineField/mineField';
-
+import InfoArea from './views/infoArea/infoArea';
 class MineSweeper extends Component {
-  constructor
 
   render() {
     return (
       <View style={styles.container}>
-        <Text>123</Text>
-        <View>
-        </View>
+        <InfoArea></InfoArea>
         <MineField
           level={1}
         />
