@@ -131,12 +131,13 @@ module.exports = class MineField extends Component {
                 for (let j = -1; j <= 1; j++) {
                     let x = row + i,
                         y = col + j;
-                    if(this.state.data[x][y].type == 2 && this.state.data[x][y].haveMine){
-                      alert('Wrong Flag');
-                    }
-                    if (x >= 0 && y >= 0 && x < this.rows && y < this.cols && (i != 0 || j != 0) &&
-                      (this.state.data[x][y].around == 0 || nowAt.around == 0)) {
-                        this._openMore(x, y);
+                    if (x >= 0 && y >= 0 && x < this.rows && y < this.cols && (i != 0 || j != 0)) {
+                        if(this.state.data[x][y].type == 2 && this.state.data[x][y].haveMine){
+                          alert('Wrong Flag');
+                        }
+                        if(this.state.data[x][y].around == 0 || nowAt.around == 0){
+                          this._openMore(x, y);
+                        }
                     }
                 }
             }
